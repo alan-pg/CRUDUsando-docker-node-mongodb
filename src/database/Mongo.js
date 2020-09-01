@@ -1,16 +1,19 @@
-var mongo = require('mongodb').MongoClient
+import { MongoClient as mongo } from 'mongodb';
 
-var DATABASE = 'application';
-var MONGODB_URI = 'mongodb://db:27017';
+const DATABASE = 'application';
+const MONGODB_URI = 'mongodb://db:27017';
 
-module.exports = function getDatabase(callback) {
-  var dbOptions = {
+export const getDatabase = () => {
+  const dbOptions = {
     useNewUrlParser: true,
   };
-  mongo.connect(MONGODB_URI, dbOptions, function(err, client) {
-    if (err) return callback(err);
-    
-    var db = client.db(DATABASE);
-    callback(null, db);
-  });
+  const promiseCallback = (resolve, reject) => {
+    mongo.connect(MONGODB_URI, dbOptions, (err, client) => {
+      if (err) return reject(err);
+
+      const db = client.db(DATABASE);
+      resolve(db);
+    });
+  }
+  return new Promise(promiseCallback);
 };
