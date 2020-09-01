@@ -1,5 +1,5 @@
-var express = require('express');
-var getDatabase = require('./src/database/Mongo');
+import express from 'express';
+import getDatabase from './src/database/Mongo';
 var PORT =  3000;
 var HOST = '0.0.0.0';
 
