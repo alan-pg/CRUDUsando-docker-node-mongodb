@@ -1,11 +1,23 @@
 var express = require('express');
-
+var getDatabase = require('./src/database/Mongo');
 var PORT =  3000;
+var HOST = '0.0.0.0';
 
 var app = express();
 
 app.use('/', function(req, res) {
-  res.send('Docker node mongodbbbbbbb');
+
+  getDatabase(function(dbErr, db) {
+    if (dbErr) return res.json({error: dbErr});
+
+    var collection = db.collection('accounts');
+
+    collection.insertOne({name: 'Alan Gonçalves'}, (insertErr, result) => {
+     if (insertErr) return res.json({error: insertErr});
+     
+     return res.json({data: result.ops[0]});
+    });
+  });
 });
 
 app.listen(PORT, function() {
