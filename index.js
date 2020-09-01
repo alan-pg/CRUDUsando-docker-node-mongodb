@@ -1,23 +1,21 @@
 import express from 'express';
-import getDatabase from './src/database/Mongo';
-var PORT =  3000;
-var HOST = '0.0.0.0';
+import { getDatabase } from './src/database/Mongo';
 
-var app = express();
+const PORT =  3000;
+const HOST = '0.0.0.0';
 
-app.use('/', function(req, res) {
+const app = express();
 
-  getDatabase(function(dbErr, db) {
-    if (dbErr) return res.json({error: dbErr});
-
-    var collection = db.collection('accounts');
-
-    collection.insertOne({name: 'Alan Gonçalves'}, (insertErr, result) => {
-     if (insertErr) return res.json({error: insertErr});
-     
-     return res.json({data: result.ops[0]});
-    });
-  });
+app.use('/', async (req, res) => {
+  try {
+    const db = await getDatabase();
+    const collection = db.collection('accounts');
+    const result = await collection.insertOne({ name: 'Alan Gonçalves' });
+    const data = result.ops[0];
+    res.json({message: 'Account Created', data });
+  }catch(e){
+    res.json({message: `Something's wrong`, error: e});
+  }
 });
 
 app.listen(PORT, function() {
