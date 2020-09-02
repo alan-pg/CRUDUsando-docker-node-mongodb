@@ -1,5 +1,5 @@
 import express from 'express';
-import routes from './src/routes';
+import routes from 'routes';
 
 const PORT =  3000;
 const HOST = '0.0.0.0';
