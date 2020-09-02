@@ -1,3 +1,4 @@
+import faker from 'faker';
 import { getDatabase  } from '../database/Mongo';
 
 export default {
@@ -14,9 +15,11 @@ export default {
   },
   create: async (req, res) => {
     try {
+
+      const account = faker.helpers.createCard(); 
       const db = await getDatabase();
       const collection = db.collection('accounts');
-      const result = await collection.insertOne({ name: 'Alan Gonçalves' });
+      const result = await collection.insertOne(account);
       const data = result.ops[0];
       res.json({message: 'Account Created', data });
     }catch(e){
