@@ -6,7 +6,7 @@ const HOST = '0.0.0.0';
 
 const app = express();
 
-app.use('/', async (req, res) => {
+app.use('/create', async (req, res) => {
   try {
     const db = await getDatabase();
     const collection = db.collection('accounts');
@@ -14,6 +14,20 @@ app.use('/', async (req, res) => {
     const data = result.ops[0];
     res.json({message: 'Account Created', data });
   }catch(e){
+    console.error(e);
+    res.json({message: `Something's wrong`, error: e});
+  }
+});
+
+
+app.use('/', async (req, res) => {
+  try {
+    const db = await getDatabase();
+    const collection = db.collection('accounts');
+    const data = await collection.find({}).toArray();
+    res.json({message: 'Accounts found', data });
+  }catch(e){
+    console.error(e);
     res.json({message: `Something's wrong`, error: e});
   }
 });
