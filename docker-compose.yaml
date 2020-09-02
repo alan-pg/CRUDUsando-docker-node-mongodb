@@ -7,6 +7,11 @@ services:
             - .:/usr/app
         ports:
             - "3000:3000"
+        environment:
+            - PORT=3000
+            - MONGODB_DATABASE=application
+            - MONGODB_URI=mongodb://db:27017
+            - NODE_PATH=src/
         depends_on:
             - db
     db:
