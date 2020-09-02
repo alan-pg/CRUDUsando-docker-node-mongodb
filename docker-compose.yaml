@@ -15,3 +15,13 @@ services:
             - ./data:/data/db
         ports:
             - "27017:27017"
+    adminmongo:
+        image: "mrvautin/adminmongo"
+        ports:
+            - "1234:1234"
+        environment:
+            - DB_HOST=db
+            - DB_PORT=27017
+            - HOST=0.0.0.0
+        depends_on:
+            - db
