@@ -1,7 +1,9 @@
-import { MongoClient as mongo } from 'mongodb';
+const mongo = require('mongodb').MongoClient
 
-const DATABASE = 'application';
-const MONGODB_URI = 'mongodb://db:27017';
+const DATABASE = process.env.MONGODB_DATABASE;
+const MONGODB_URI = process.env.MONGODB_URI;
+
+export const COLLECTION_ACCOUNTS = 'accounts';
 
 export const getDatabase = () => {
   const dbOptions = {
@@ -17,3 +19,7 @@ export const getDatabase = () => {
   }
   return new Promise(promiseCallback);
 };
+
+export const getCollection = (collectionName) => {
+  return getDatabase().then(db => db.collection(collectionName))
+}
