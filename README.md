@@ -8,7 +8,8 @@ Projeto desenvolvido durante aula na Digital Innovation One, objetivo do projeto
 um segundo container disponibilizando um serviço de banco de dados com Mongodb utilizando dockercompose.
 
 # Tecnologias utilizadas
-![web_1](https://drive.google.com/file/d/1TJ3e8Kgaykxp2LQ--B-I_eolF1csZwVw/view?usp=sharing)
+![web_1](https://github.com/alan-pg/CRUDUsando-docker-node-mongodb/blob/master/img/dockericon.png)
+![web_1](https://github.com/alan-pg/CRUDUsando-docker-node-mongodb/blob/master/img/nodejs.jpg)
 - Docker
 - Nodejs
 
